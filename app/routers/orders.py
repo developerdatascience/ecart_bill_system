@@ -2,41 +2,19 @@
 This module defines the data models for the recipe application.
 """
 import pandas as pd
-from typing import Annotated, List
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, Depends, UploadFile, File
+from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, APIRouter
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
-import models
-from models import Bill, Cart
-from database import engine, get_db
-app = FastAPI()
+from app.models.orders import Bill, Cart, ProductCatalogue
+from app.schema.orders import IngredientListBase, BillBase, BillResponse, ShopListBase
+from app.database import engine, get_db, Base, DbDependency
 
-models.Base.metadata.create_all(bind=engine)
-
-class IngredientListBase(BaseModel):
-    """Represents a list of ingredients"""
-    name: str
-    quantity: float
-
-class BillBase(BaseModel):
-    """Repesent ingredient in a recipe"""
-    bill_no: int
-    bill_date: str
-    ingredients: List[IngredientListBase]
-
-class BillResponse(BillBase):
-    """Response model for a bill"""
-    ingredients: List[IngredientListBase]
-
-class ShopListBase(BaseModel):
-    """Request model needs bill number and ingredients"""
-    ingredient_list: List[IngredientListBase]
+Base.metadata.create_all(bind=engine)
+router = APIRouter()
 
 
-DbDependency = Annotated[Session, Depends(get_db)]
-
-@app.get("/bills/{bill_no}", response_model=BillResponse)
+@router.get("/bills/{bill_no}", response_model=BillResponse)
 async def get_bill(bill_no: int, db: DbDependency):
     """Get a bill by its bill number with all associated ingredients"""
     bill = db.query(Bill).filter(Bill.bill_no == bill_no).first()
@@ -56,7 +34,7 @@ async def get_bill(bill_no: int, db: DbDependency):
         ]
     }
 
-@app.post("/add_items")
+@router.post("/add_items")
 async def add_items(shop_list: ShopListBase, db: DbDependency):
     """Create a new bill with summed quantities"""
     try:
@@ -76,13 +54,21 @@ async def add_items(shop_list: ShopListBase, db: DbDependency):
         db.flush()
 
         # Add cart items
+        # db_cart_items = []
+        for ing in shop_list.ingredient_list:
+            product = db.query(ProductCatalogue).filter(ProductCatalogue.id == ing.product_id).first()
+            if not product:
+                raise HTTPException(status_code=404, detail=f"Product with ID {ing.product_id} not found!!!")
+
         db_cart_items = [
             Cart(
                 name=ing.name,
+                product_id = ing.product_id,
                 quantity=ing.quantity,  # Ensure this matches request field
-                bill_id=db_bill.id
-            )
-            for ing in shop_list.ingredient_list
+                bill_id=db_bill.id,
+                mrp = product.mrp,
+                total = ing.quantity * product.mrp
+                )
         ]
         db.add_all(db_cart_items)
         
@@ -92,7 +78,12 @@ async def add_items(shop_list: ShopListBase, db: DbDependency):
         return {
             "bill_no": db_bill.bill_no,
             "cart_items": [
-                {"name": item.name, "quantity": item.quantity}
+                {
+                    "name": item.name, 
+                    "product_id":item.product_id, 
+                    "quantity": item.quantity,
+                    "mrp": item.product.mrp
+                }
                 for item in db_cart_items
             ]
         }
@@ -103,7 +94,7 @@ async def add_items(shop_list: ShopListBase, db: DbDependency):
     
 
 
-@app.post("/upload_catalogue")
+@router.post("/upload_catalogue")
 async def upload_catalogue(db: DbDependency, file: UploadFile = File(...)):
     """Upload a catalogue of products with their prices"""
     try:

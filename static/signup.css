@@ -1,0 +1,109 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    background-color: whitesmoke;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(14, 14, 109, 0.829);
+    display: flex;
+    align-items: center;
+}
+
+.nav-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-header h2 {
+    color: white;
+}
+.nav-header i {
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-container {
+    background-color: white;
+    padding: 50px 70px;
+    border-radius: 10px;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+hr {
+    width: 320px;
+    height: 2px;
+    background-color: rgba(227, 213, 213, 0.705);
+    margin: 15px 0;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input {
+    width: 20rem;
+    padding: 12px;
+    margin: 10px 0 15px 0px;
+    border: 1px solid rgb(151, 144, 144);
+    border-radius: 10px;
+}
+
+.button-group button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid rgb(63, 63, 133);
+    border-radius: 10px;
+    background-color: rgb(63, 63, 133);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.button-group button:hover {
+    background-color: rgb(106, 106, 203);
+    cursor: pointer;
+}
+
+.account-exists {
+    display: flex;
+    justify-content: center;
+}
+
+.account-exists a {
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.account-exists a:hover {
+    text-decoration: underline;
+}
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/606d99f9be.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/login.css">
+    <title>GroceryPay-Login</title>
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="nav-header">
+                <i class="fa-brands fa-opencart"></i>
+                <h2>GroceryPay</h2>
+            </div>
+        </div>
+        <div class="signin-container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 class="header">
+                        Login
+                    </h2>
+                    <hr class="line"></hr>
+                </div>
+                <form action="/login">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="submit">Sign in</button>
+                    </div>
+                    <div class="no-account">
+                        <p>Not registered?<a href="">Create an account</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

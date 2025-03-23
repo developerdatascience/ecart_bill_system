@@ -6,10 +6,9 @@ from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql import func
-from database import Base
+from app.database import Base
 
 
-# Updated Models
 class Bill(Base):
     """Represents a bill"""
     __tablename__ = "bills"
@@ -32,10 +31,14 @@ class Cart(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
+    product_id = Column(Integer, ForeignKey("products_catalogue.id"), index=True, nullable=False)
     quantity = Column(Float)
+    mrp = Column(Float)
+    total = Column(Float)
     buy_date = Column(Date, default=func.current_date()) # pylint: disable=not-callable
     bill_id = Column(Integer, ForeignKey("bills.id"), nullable=False)
     bill = relationship("Bill", back_populates="cart")
+    product = relationship("ProductCatalogue", back_populates="cart")
 
 
 class ProductCatalogue(Base):
@@ -49,3 +52,4 @@ class ProductCatalogue(Base):
     pack_size = Column(String)
     category = Column(String)
     upload_date = Column(Date, default=func.current_date()) # pylint: disable=not-callable
+    cart = relationship("Cart", back_populates="product")
