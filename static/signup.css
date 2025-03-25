@@ -47,6 +47,7 @@ body {
     background-color: white;
     padding: 50px 70px;
     border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-header {
@@ -107,3 +108,31 @@ hr {
     text-decoration: underline;
 }
 
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 300px;
+    min-width: 250px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+}
+
+.toast i {
+    margin: 0px 10px 0px 0px;
+    font-size: 20px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}

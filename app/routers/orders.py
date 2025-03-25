@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
 from app.models.orders import Bill, Cart, ProductCatalogue
 from app.schema.orders import IngredientListBase, BillBase, BillResponse, ShopListBase
-from app.database import engine, get_db, Base, DbDependency
+from app.core.database import engine, get_db, Base, DbDependency
 
 Base.metadata.create_all(bind=engine)
 router = APIRouter()
@@ -112,7 +112,7 @@ async def upload_catalogue(db: DbDependency, file: UploadFile = File(...)):
 
         # Convert DataFrame to list of dictionaries
         products = df.to_dict(orient="records")
-        db.bulk_insert_mappings(models.ProductCatalogue, products)
+        db.bulk_insert_mappings(ProductCatalogue, products)
         db.commit()
         return {"message": f"Successfully uploaded {len(products)} products"}
     except Exception as e:

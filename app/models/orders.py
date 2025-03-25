@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql import func
-from app.database import Base
+from app.core.database import Base
 
 
 class Bill(Base):
