@@ -15,6 +15,23 @@
                 <h2>GroceryPay</h2>
             </div>
         </div>
+
+        {% if success %}
+        <div class="toast show" id="toast">
+            <i class="fa-solid fa-circle-check"></i>
+            <p class="message">Login successfull</p>
+        </div>
+        {% endif %}
+
+        <!-- Error message -->
+         {% if error %}
+        <div class="messagebox show" id = "messagebox">
+            <div class="message error" id="message">
+               <i class="fa-solid fa-circle-xmark"></i>
+               <p>{{ error }}</p>
+            </div>
+         </div>
+         {% endif %}
         <div class="signin-container">
             <div class="form-container">
                 <div class="form-header">
@@ -23,7 +40,7 @@
                     </h2>
                     <hr class="line"></hr>
                 </div>
-                <form action="/login">
+                <form action="/login_dashboard" method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" required>
@@ -36,11 +53,12 @@
                         <button type="submit" class="submit">Sign in</button>
                     </div>
                     <div class="no-account">
-                        <p>Not registered?<a href="">Create an account</a></p>
+                        <p>Not registered?<a href="/signup">Create an account</a></p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="/static/js/register.js"></script>
 </body>
 </html>

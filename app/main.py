@@ -19,4 +19,4 @@ app.add_middleware(
 
 app.include_router(landingpage.router, tags=["landingpage"])
 app.include_router(orders.router, tags=["orders"])
-app.include_router(login.router, tags=["login"])
+app.include_router(login.router, tags=["Authentications"])

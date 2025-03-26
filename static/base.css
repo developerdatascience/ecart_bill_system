@@ -18,6 +18,13 @@ body {
     height: 100vh;
 }
 
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 .sidebar {
     position: relative;
     width: 250px;
@@ -142,6 +149,14 @@ body {
 
 .sidebar.collapsed .menu li p {
     display: none;
+}
+
+
+/* /* ==========================main========================== * */
+
+.main {
+    background-color: var(--accent-color);
+    width: 100%;
 }
 
 

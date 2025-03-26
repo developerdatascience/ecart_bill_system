@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from app.core.config import settings
 from typing import Optional
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer
 from app.core.database import get_db, SessionLocal
 from sqlalchemy.orm import Session
@@ -25,18 +25,21 @@ def get_hashed_password(password):
 def authenticate_user(db: Session, email: str, password: str):
     """Authenticate a user"""
     user = db.query(User).filter(User.email == email).first()
-    if not user or not verify_password(password, user.password):
+    if not user or not verify_password(password, user.hashed_password):
         return None
     return user
     
 
-async def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
-    """Get the current user from the token"""
+async def get_current_user(request: Request,db: Session = Depends(get_db)):
+    """Get current user from cookie"""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
-        headers = {"WWW-Authenticate": "Bearer"}
+        headers={"WWW-Authenticate": "Bearer"}
     )
+    
+    token = request.cookies.get("access_token")
+    
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         email: str = payload.get("sub")

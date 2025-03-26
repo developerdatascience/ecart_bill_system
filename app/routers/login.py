@@ -2,6 +2,7 @@
 Creating a user signup and signup routes
 """
 
+from datetime import  timedelta
 from fastapi import APIRouter, Depends, HTTPException, Request, Form, status, Query
 from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -9,9 +10,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from app.core.database import engine, get_db, Base
 from app.models.users import User, UserLoginLog
-from app.schema.users import SignUp, SignIn, Token, UserOut
+from app.schema.users import SignUp, LoginRequest, Token, UserOut
 from app.core.database import get_db, DbDependency
-from app.core.auth import get_hashed_password, create_access_token
+from app.core.auth import get_hashed_password, create_access_token, authenticate_user, get_current_user, get_current_active_user
+from app.core.config import settings
 
 
 Base.metadata.create_all(bind=engine)
@@ -78,3 +80,79 @@ async def register(
         db.rollback()
         raise RedirectResponse(url=f"/signup?error={str(e).replace(' ', '+')}", 
                                status_code = status.HTTP_303_SEE_OTHER)
+
+
+@router.get("/signin", response_class=HTMLResponse, status_code=200)
+async def getsiginpage(request: Request):
+    return templates.TemplateResponse("sigin.html", {"request": request})
+
+
+
+@router.get("/application", response_class=HTMLResponse, status_code=200)
+async def application(request: Request, user: User = Depends(get_current_user)):
+    return templates.TemplateResponse("base.html", {"request": request, "user": user})
+
+
+@router.get("/login", response_class=HTMLResponse, status_code=200)
+async def login_page(
+    request: Request,
+    error: str = None,
+    success: str = None
+):
+    """Render login page with error/success messages"""
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request,
+            "error": error,
+            "success": success
+        }
+    )
+
+@router.post("/login_dashboard", response_class=HTMLResponse, status_code=200)
+async def login_user(
+    db: DbDependency,
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...)
+):
+    """Handle login form submission"""
+    #Authenticate user
+    user = authenticate_user(db, email, password)
+
+    if not user:
+        return RedirectResponse(
+            url="/login?error=Invalid+email+or+password",
+            status_code = status.HTTP_303_SEE_OTHER
+        )
+    
+    if not user.is_active:
+        return RedirectResponse(
+            url="/login?error=Account+is+disabled",
+            status_code = status.HTTP_303_SEE_OTHER
+        )
+    
+    # Create access token
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = await create_access_token(
+        data = {"sub": user.email},
+        expires_delta = access_token_expires
+    )
+
+    response = RedirectResponse(url="/application", status_code = status.HTTP_303_SEE_OTHER)
+
+    # Set HTTP-only cookie with token
+
+    response.set_cookie(
+        key="access_token",
+        value= access_token,
+        httponly=True,
+        max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        secure = True,
+        samesite="Lax"
+    )
+
+    return response
+
+    
+    

@@ -2,9 +2,9 @@ from pydantic import BaseModel
 from typing import List
 
 
-class SignIn(BaseModel):
+class LoginRequest(BaseModel):
     """schema for sign in"""
-    username: str
+    email: str
     password: str
 
 
@@ -25,3 +25,12 @@ class Token(BaseModel):
     """JWT token response"""
     access_token: str
     token_type: str
+
+
+class TokenResponse(BaseModel):
+    """JWT toke response"""
+    access_token: str
+    token_type: str
+    user_id: int
+    email: str
+    username: str
