@@ -1,32 +1,48 @@
-document.getElementById("signupForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.getElementById("signForm").addEventListener("submit", async (e) => {
+//         e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+//         const username = document.getElementById("username").value;
+//         const email = document.getElementById("email").value;
+//         const password = document.getElementById("password").value;
 
-    try {
-        const response  = await fetch("/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password })
-        });
+//         const formData = new FormData();
+//         formData.append("username", username);
+//         formData.append("email", email);
+//         formData.append("password", password);
 
-        if (response.ok){
-            showToast();
-            document.getElementById("signupForm").reset();
-        }  
-    } catch(error) {
-        console.error('Error: ', error)
-    }
-});
+//         try {
+//             const response = await fetch("/register", {
+//                 method: "POST",
+//                 body: formData
+//             });
 
-function showToast() {
-    const  toast = document.getElementById("toast");
-    toast.classList.add("show");
+//             if (response.ok) {
+//                 showToast();
+//                 document.getElementById("signForm").reset();
+//             } else {
+//                 console.error("Registration failed:", response.status, response.statusText);
+//             }
+//         } catch (error) {
+//             console.error('Error:', error);
+//         }
+//     });
+// });
 
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3000);
-}
+// function showToast() {
+//     const toast = document.getElementById("toast");
+//     toast.classList.add("show");
+//     setTimeout(() => {
+//         toast.classList.remove("show");
+//     }, 3000);
+// }
+
+const errormessage = document.getElementById("messagebox");
+setTimeout(() => {
+    errormessage.remove("show");
+}, 6000);
+
+const toast = document.getElementById("toast");
+setTimeout(() => {
+    toast.classList.remove("show");
+}, 6000);
