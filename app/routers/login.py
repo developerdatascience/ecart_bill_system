@@ -2,7 +2,7 @@
 Creating a user signup and signup routes
 """
 
-from datetime import  timedelta
+from datetime import  timedelta, datetime
 from fastapi import APIRouter, Depends, HTTPException, Request, Form, status, Query
 from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -90,7 +90,11 @@ async def getsiginpage(request: Request):
 
 @router.get("/application", response_class=HTMLResponse, status_code=200)
 async def application(request: Request, user: User = Depends(get_current_user)):
-    return templates.TemplateResponse("base.html", {"request": request, "user": user})
+    return templates.TemplateResponse("base.html", {"request": request, 
+                                                    "user": {
+                                                        "username": user.username,
+                                                        "email": user.email}
+                                                    })
 
 
 @router.get("/login", response_class=HTMLResponse, status_code=200)
@@ -141,6 +145,11 @@ async def login_user(
 
     response = RedirectResponse(url="/application", status_code = status.HTTP_303_SEE_OTHER)
 
+    login_log= UserLoginLog(user_id=user.id)
+    db.add(login_log)
+    db.commit()
+    db.refresh(login_log)
+
     # Set HTTP-only cookie with token
 
     response.set_cookie(
@@ -155,4 +164,39 @@ async def login_user(
     return response
 
     
-    
+
+@router.post("/logout", response_class=HTMLResponse, status_code=200)
+async def logout_user(
+     db: DbDependency,
+    user: User = Depends(get_current_active_user)
+):
+    """
+    Handle user logout by:
+    1. Recording logout time in UserLoginLog
+    2. Clearing authentication cookie
+    3. Redirecting to login page
+    """
+    # Find the most recent login entry withour login time
+    login_log = db.query(UserLoginLog).filter(
+        UserLoginLog.user_id == user.id,
+        UserLoginLog.logout_time.is_(None)
+    ).order_by(UserLoginLog.login_time.desc()).first()
+
+    if login_log:
+        login_log.logout_time = datetime.now()
+        db.add(login_log)
+        db.commit()
+
+    response = RedirectResponse(
+        url="/login",
+        status_code = status.HTTP_303_SEE_OTHER
+    )
+
+    response.delete_cookie(
+        key="access_token",
+        httponly=True,
+        secure=True,
+        samesite="Lax"
+        )
+
+    return response

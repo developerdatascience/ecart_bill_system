@@ -5,65 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/606d99f9be.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/base.css">
-    <title>Document</title>
+    <title>{% block title %}GroceryPay{% endblock %}</title>
 </head>
 <body>
     <div class="container">
         <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <i class="fa-brands fa-opencart"></i>
-                <h2>GroceryPay</h2>
-            </div>
-            <div class="menu-btn" id="toggle-btn">
-                <i class="fa-solid fa-circle-chevron-right"></i>
-            </div>
-    
-            <div class="menu">
-                <ul>
-                    <li><a href="/dashboard">
-                        <i class="fa-solid fa-gauge-high"></i>
-                        <p>Dashboard</p>
-                    </a></li>
-                    <li><a href="/billing">
-                        <i class="fa-solid fa-indian-rupee-sign"></i>
-                        <p>Billing</p>
-                    </a></li>
-                    <li><a href="/inventory">
-                        <i class="fa-solid fa-box"></i>
-                        <p>Inventory</p>
-                    </a></li>
-                    <li><a href="/stockalerts">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <p>Stock Alerts</p>
-                    </a></li>
-                    <li><a href="/analytics">
-                        <i class="fa-solid fa-chart-column"></i>
-                        <p>Analytics</p>
-                    </a></li>
-                    <li><a href="/forecast">
-                        <i class="fa-solid fa-brain"></i>
-                        <p>AI Forecast</p>
-                    </a></li>
-                    <li><a href="/marketing">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <p>Marketing</p>
-                    </a></li>
-                    <li><a href="/discounts">
-                        <i class="fa-solid fa-percent"></i>
-                        <p>Discounts</p></a></li>
-                    <li><a href="/settings">
-                        <i class="fa-solid fa-gear"></i>
-                        <p>Settings</p>
-                    </a></li>
-                    <li><a href="/profile">
-                        <i class="fa-solid fa-user"></i>
-                        <p>Profile</p>
-                    </a></li>
-                </ul>
-            </div>
+            {% include 'sidebar.html' %}
         </div>
-        <div class="main">
-            <h2>I am here</h2>
+        <div class="main" id="main-content">
+            <div class="navbar-ctrl">
+                <div class="user">
+                    {% if user %}
+                    <i class="fa-solid fa-user"></i>
+                    <p class="username">{{ user.username }}</p>
+                    {% endif %}
+                </div>
+                <div class="form-container">
+                    <form action="/logout" method="post">
+                        <button type="submit">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% block content %}{% endblock %}
         </div>
     </div>
     <script src="/static/js/base.js"></script>
