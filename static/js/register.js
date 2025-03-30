@@ -37,12 +37,46 @@
 //     }, 3000);
 // }
 
-const errormessage = document.getElementById("messagebox");
-setTimeout(() => {
-    errormessage.remove("show");
-}, 6000);
+// const errormessage = document.getElementById("messagebox");
+// setTimeout(() => {
+//     errormessage.remove("show");
+// }, 6000);
 
-const toast = document.getElementById("toast");
+// const toast = document.getElementById("toast");
+// setTimeout(() => {
+//     toast.classList.remove("show");
+// }, 6000);
+
+
+
+// document.getElementById("profile-form").addEventListener("submit", async function(event) {
+//     event.preventDefault();
+    
+//     const formData = new FormData(this);
+
+//     const response = await fetch("/update_profile", {
+//         method: "POST",
+//         body: formData
+//     });
+
+//     if (response.ok) {
+//         showToast("Profile updated successfully!")
+//     } else {
+//         showToast("Failed to update profile")
+//     }
+// });
+
+// function showToast(message, isError = false) {
+//     let toast = document.getElementById("toast");
+//     toast.innerText = message;
+//     toast.className = isError ? "toast error" : "toast";
+//     toast.style.display = "block";
+//     setTimeout(() => { toast.style.display = "none"; }, 3000);
+// }
+
+
+
+const updatemessage = document.getElementById("flash-messages");
 setTimeout(() => {
-    toast.classList.remove("show");
-}, 6000);
+    updatemessage.remove("show");
+}, 3000);

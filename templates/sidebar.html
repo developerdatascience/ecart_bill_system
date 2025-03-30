@@ -8,42 +8,44 @@
 
 <div class="menu">
     <ul>
-        <li><a href="/dashboard">
+        {% if user.username == "admin" %}
+        <li><a href="/dashboard" class="ajax-link"> 
             <i class="fa-solid fa-gauge-high"></i>
             <p>Dashboard</p>
+        {% endif %}
         </a></li>
-        <li><a href="/billing">
+        <li><a href="/billing" class="ajax-link">
             <i class="fa-solid fa-indian-rupee-sign"></i>
             <p>Billing</p>
         </a></li>
-        <li><a href="/inventory">
+        <li><a href="/inventory" class="ajax-link">
             <i class="fa-solid fa-box"></i>
             <p>Inventory</p>
         </a></li>
-        <li><a href="/stockalerts">
+        <li><a href="/stockalerts" class="ajax-link">
             <i class="fa-solid fa-triangle-exclamation"></i>
             <p>Stock Alerts</p>
         </a></li>
-        <li><a href="/analytics">
+        <li><a href="/analytics" class="ajax-link">
             <i class="fa-solid fa-chart-column"></i>
             <p>Analytics</p>
         </a></li>
-        <li><a href="/forecast">
+        <li><a href="/forecast" class="ajax-link">
             <i class="fa-solid fa-brain"></i>
             <p>AI Forecast</p>
         </a></li>
-        <li><a href="/marketing">
+        <li><a href="/marketing" class="ajax-link">
             <i class="fa-solid fa-chart-line"></i>
             <p>Marketing</p>
         </a></li>
-        <li><a href="/discounts">
+        <li><a href="/discounts" class="ajax-link">
             <i class="fa-solid fa-percent"></i>
             <p>Discounts</p></a></li>
-        <li><a href="/settings">
+        <li><a href="/settings" class="ajax-link">
             <i class="fa-solid fa-gear"></i>
             <p>Settings</p>
         </a></li>
-        <li><a href="/profile">
+        <li><a href="/profile" class="ajax-link">
             <i class="fa-solid fa-user"></i>
             <p>Profile</p>
         </a></li>

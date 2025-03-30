@@ -20,11 +20,14 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.nav-header {
+.nav-header a{
+    text-decoration: none;
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 0.8rem;
 }
+
 
 .nav-header i {
     font-size: 2rem;

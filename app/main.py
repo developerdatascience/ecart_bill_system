@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import orders, login, landingpage
+from .routers import orders, login, landingpage, profile, analytics
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -17,6 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
 app.include_router(landingpage.router, tags=["landingpage"])
 app.include_router(orders.router, tags=["orders"])
 app.include_router(login.router, tags=["Authentications"])
+app.include_router(profile.router, tags=["profile"])
+app.include_router(analytics.router, tags=["analytics"])

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - GroceryPay{% endblock %}
+
+{% block content %}
+    <div class="profile">
+        <div class="flash-messages show" id="flash-messages">
+            {% if flash_success %}
+            <div class="alert success">
+                <i class="fas fa-check-circle"></i> {{ flash_success }}
+            </div>
+            {% endif %}
+            
+            {% if flash_error %}
+            <div class="alert error">
+                <i class="fas fa-exclamation-circle"></i> {{ flash_error }}
+            </div>
+            {% endif %}
+        </div>
+        <form action="/update_profile" id="profile-form" method="post" enctype="multipart/form-data">
+            <div class="upload_pic">
+                <div class="img-section">
+                    <img src="{{ user.profile_picture }}" alt="Profile Picture" onerror="this.onerror=null;this.src='/static/images/default.png';">
+                </div>
+                <div class="upload-section">
+                    <!-- Changed name attribute to match the endpoint parameter -->
+                    <input type="file" name="profile_picture" id="profile_picture">
+                </div>
+            </div>
+            <div class="form-input">
+                <div class="name-group">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" value="{{ user.username }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Designation</label>
+                    <input type="text" name="designation" id="designation" value="{{ user.designation }}" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit">Update Profile</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

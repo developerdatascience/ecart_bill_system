@@ -42,6 +42,8 @@ async def signup(
 async def register(
     request: Request,
     db:DbDependency,
+    first_name: str = Form(...),
+    last_name: str = Form(...),
     username: str = Form(...),
     email: str = Form(...),
     password: str = Form(...)
@@ -64,6 +66,8 @@ async def register(
     hashed_password = get_hashed_password(password)
     try:
         new_user = User(
+        first_name = first_name,
+        last_name = last_name,
         username = username,
         email = email,
         hashed_password = hashed_password

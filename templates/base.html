@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/606d99f9be.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/profile.css">
     <title>{% block title %}GroceryPay{% endblock %}</title>
 </head>
 <body>
@@ -16,7 +17,8 @@
             <div class="navbar-ctrl">
                 <div class="user">
                     {% if user %}
-                    <i class="fa-solid fa-user"></i>
+                    <img src="/static/images/{{ user.email }}/{{ user.username }}.jpg" alt="" srcset="">
+                    <!-- <i class="fa-solid fa-user"></i> -->
                     <p class="username">{{ user.username }}</p>
                     {% endif %}
                 </div>
@@ -33,5 +35,6 @@
         </div>
     </div>
     <script src="/static/js/base.js"></script>
+    <script src="/static/js/register.js"></script>
 </body>
 </html>
