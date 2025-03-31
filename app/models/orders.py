@@ -51,5 +51,7 @@ class ProductCatalogue(Base):
     mrp = Column(Float)
     pack_size = Column(String)
     category = Column(String)
+    discount = Column(Float)
+    barcode = Column(String)
     upload_date = Column(Date, default=func.current_date()) # pylint: disable=not-callable
     cart = relationship("Cart", back_populates="product")

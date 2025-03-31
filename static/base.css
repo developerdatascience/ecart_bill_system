@@ -162,14 +162,29 @@ body {
 }
 
 .main .navbar-ctrl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar-ctrl {
     height: 70px;
     width: 100%;
     background-color: #ffffff;;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+}
+
+.navbar-ctrl .left {
+    display: flex;
     align-items: center;
-    gap: 50px;
+    margin-left: 20px;
+}
+
+.navbar-ctrl .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .navbar-ctrl .user {

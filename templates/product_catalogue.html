@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - GroceryPay{% endblock %}
+{% block header %}Upload Product Catalogue{% endblock %}
+
+{% block content %}
+    <div class="catalogue-container">
+        <div class="flash-messages" id="flash-messages">
+            {% if flash_success %}
+            <div class="alert success">
+                <i class="fas fa-check-circle"></i> {{ flash_success }}
+            </div>
+            {% endif %}
+            
+            {% if flash_error %}
+            <div class="alert error">
+                <i class="fas fa-exclamation-circle"></i> {{ flash_error }}
+            </div>
+            {% endif %}
+        </div>
+        
+        <form action="/upload_catalogue" method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-group">
+                <label for="file" class="upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span class="upload-text">Choose CSV or Excel file</span>
+                    <input type="file" name="file" id="file" accept=".csv,.xlsx,.xls" required>
+                </label>
+                <div class="file-name" id="file-name">No file chosen</div>
+            </div>
+            
+            <button type="submit" class="upload-button">
+                <i class="fas fa-upload"></i> Upload Catalogue
+            </button>
+        </form>
+    </div>
+
+<script>
+document.getElementById('file').addEventListener('change', function(e) {
+    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+    document.getElementById('file-name').textContent = fileName;
+});
+</script>
+{% endblock %}

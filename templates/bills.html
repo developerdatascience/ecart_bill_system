@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Billing - GroceryPay{% endblock %}
+
+{% block header %}Bill Point{% endblock %}
+
+{% block content %}
+    <div class="billing-container">
+        <form action="" method="post" id="add-items" class="billing-form">
+            <div class="form-group">
+                <label for="item-name" class="form-label">Item Description</label>
+                <select name="item-name" id="item-name" class="form-input select-input">
+                    <option value="Apples-10s">Apples</option>
+                    <option value="soap-5s">Himalaya Soap</option>
+                    <option value="Havmor-icecream-cup-80ml">Havmor Cup Icecream</option>
+                    <option value="grapes-1kg">Grapes-1kg</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="form-label">Quantity</label>
+                <input type="number" name="qty" id="qty" class="form-input" min="1" value="1">
+            </div>
+
+            <div class="form-group">
+                <label for="discount" class="form-label">Discount (%)</label>
+                <input type="text" name="discount" id="discount" class="form-input" placeholder="0">
+            </div>
+
+            <div class="form-group">
+                <label for="price" class="form-label">Total Price (₹)</label>
+                <input type="text" name="price" id="price" class="form-input" placeholder="0.00">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-plus-circle"></i> Add Items
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import orders, login, landingpage, profile, analytics
+from .routers import orders, login, landingpage, profile, analytics, bills, upload_catalogue
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -24,3 +24,5 @@ app.include_router(orders.router, tags=["orders"])
 app.include_router(login.router, tags=["Authentications"])
 app.include_router(profile.router, tags=["profile"])
 app.include_router(analytics.router, tags=["analytics"])
+app.include_router(bills.router, tags=["bills"])
+app.include_router(upload_catalogue.router, tags=["Upload Product Catalogue"])

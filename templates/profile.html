@@ -2,58 +2,101 @@
 
 {% block title %}Profile - GroceryPay{% endblock %}
 
+{% block header %}Profile Settings{% endblock %}
+
 {% block content %}
-    <div class="profile">
-        <div class="flash-messages show" id="flash-messages">
-            {% if flash_success %}
-            <div class="alert success">
-                <i class="fas fa-check-circle"></i> {{ flash_success }}
-            </div>
-            {% endif %}
-            
-            {% if flash_error %}
-            <div class="alert error">
-                <i class="fas fa-exclamation-circle"></i> {{ flash_error }}
-            </div>
-            {% endif %}
+<div class="profile-container">
+    <div class="flash-messages" id="flash-messages">
+        {% if flash_success %}
+        <div class="alert success">
+            <i class="fas fa-check-circle"></i> {{ flash_success }}
         </div>
-        <form action="/update_profile" id="profile-form" method="post" enctype="multipart/form-data">
-            <div class="upload_pic">
-                <div class="img-section">
-                    <img src="{{ user.profile_picture }}" alt="Profile Picture" onerror="this.onerror=null;this.src='/static/images/default.png';">
-                </div>
-                <div class="upload-section">
-                    <!-- Changed name attribute to match the endpoint parameter -->
-                    <input type="file" name="profile_picture" id="profile_picture">
-                </div>
-            </div>
-            <div class="form-input">
-                <div class="name-group">
-                    <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" value="{{ user.username }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="{{ user.email }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="designation">Designation</label>
-                    <input type="text" name="designation" id="designation" value="{{ user.designation }}" required>
-                </div>
-                <div class="button-group">
-                    <button type="submit">Update Profile</button>
-                </div>
-            </div>
-        </form>
+        {% endif %}
+        
+        {% if flash_error %}
+        <div class="alert error">
+            <i class="fas fa-exclamation-circle"></i> {{ flash_error }}
+        </div>
+        {% endif %}
     </div>
+
+    <form action="/update_profile" id="profile-form" method="post" enctype="multipart/form-data" class="profile-form">
+        <div class="profile-header">
+            <div class="avatar-upload">
+                <div class="avatar-preview">
+                    <img src="{{ user.profile_picture }}" 
+                         alt="Profile Picture" 
+                         class="profile-avatar"
+                         onerror="this.onerror=null;this.src='/static/images/default.png';">
+                    <label for="profile_picture" class="upload-overlay">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                </div>
+                <input type="file" name="profile_picture" id="profile_picture" accept="image/*" style="opacity: 0; position: absolute; z-index: -1;">
+            </div>
+            <h3 class="profile-title">{{ user.first_name }} {{ user.last_name }}</h3>
+            <p class="profile-subtitle">{{ user.designation }}</p>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-dual">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" 
+                           name="first_name" 
+                           id="first_name" 
+                           value="{{ user.first_name }}" 
+                           class="modern-input"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" 
+                           name="last_name" 
+                           id="last_name" 
+                           value="{{ user.last_name }}" 
+                           class="modern-input"
+                           required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" 
+                       name="username" 
+                       id="username" 
+                       value="{{ user.username }}" 
+                       class="modern-input"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" 
+                       name="email" 
+                       id="email" 
+                       value="{{ user.email }}" 
+                       class="modern-input"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="designation">Designation</label>
+                <input type="text" 
+                       name="designation" 
+                       id="designation" 
+                       value="{{ user.designation }}" 
+                       class="modern-input"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="modern-button">
+                <i class="fas fa-save"></i> Update Profile
+            </button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}

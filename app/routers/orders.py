@@ -92,28 +92,3 @@ async def add_items(shop_list: ShopListBase, db: DbDependency):
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e)) # pylint: disable=raise-missing-from
     
-
-
-@router.post("/upload_catalogue")
-async def upload_catalogue(db: DbDependency, file: UploadFile = File(...)):
-    """Upload a catalogue of products with their prices"""
-    try:
-        if file.filename.endswith(".csv"):
-            df: pd.DataFrame = pd.read_csv(file.file)
-        elif file.filename.endswith([".xlsx", ".xlx"]):
-            df: pd.DataFrame = pd.read_excel(file.file, engine="openpyxl")
-        else:
-            raise HTTPException(status_code=415, detail = "Unsupported file format. Only CSV, XLSX and XLS files are supported")
-
-        required_columns = {"product_name", "brand", "mrp", "pack_size", "category"}
-        df.columns = df.columns.str.lower()
-        if not required_columns.issubset(set(df.columns)):
-            raise HTTPException(status_code=400, detail="Missing required columns")
-
-        # Convert DataFrame to list of dictionaries
-        products = df.to_dict(orient="records")
-        db.bulk_insert_mappings(ProductCatalogue, products)
-        db.commit()
-        return {"message": f"Successfully uploaded {len(products)} products"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e)) # pylint: disable=raise-missing-from

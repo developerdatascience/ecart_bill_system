@@ -6,6 +6,8 @@
     <script src="https://kit.fontawesome.com/606d99f9be.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/base.css">
     <link rel="stylesheet" href="/static/profile.css">
+    <link rel="stylesheet" href="/static/bills.css">
+    <link rel="stylesheet" href="/static/catalogue.css">
     <title>{% block title %}GroceryPay{% endblock %}</title>
 </head>
 <body>
@@ -15,20 +17,25 @@
         </div>
         <div class="main" id="main-content">
             <div class="navbar-ctrl">
-                <div class="user">
-                    {% if user %}
-                    <img src="/static/images/{{ user.email }}/{{ user.username }}.jpg" alt="" srcset="">
-                    <!-- <i class="fa-solid fa-user"></i> -->
-                    <p class="username">{{ user.username }}</p>
-                    {% endif %}
+                <div class="left">
+                    <h2>{% block header %}{% endblock %}</h2>
                 </div>
-                <div class="form-container">
-                    <form action="/logout" method="post">
-                        <button type="submit">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout
-                        </button>
-                    </form>
+                <div class="right">
+                    <div class="user">
+                        {% if user %}
+                        <img src="/static/images/{{ user.email }}/{{ user.username }}.jpg" alt="" srcset="">
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <p class="username">{{ user.username }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="form-container">
+                        <form action="/logout" method="post">
+                            <button type="submit">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             {% block content %}{% endblock %}

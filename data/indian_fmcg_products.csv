@@ -1,40 +1,40 @@
-product_name,brand,mrp,pack_size,category
-Parle-G Biscuits-1kg,Parle,309.46,1kg,Biscuits & Cookies
-Monaco Biscuits-100g,Parle,305.86,100g,Biscuits & Cookies
-Hide & Seek Fab-1kg,Parle,285.94,1kg,Biscuits & Cookies
-Krackjack-100g,Parle,245.35,100g,Biscuits & Cookies
-Good Day Butter Cookies-500g,Britannia,175.4,500g,Biscuits & Cookies
-Marie Gold-200g,Britannia,48.38,200g,Biscuits & Cookies
-NutriChoice Digestive-1kg,Britannia,249.0,1kg,Biscuits & Cookies
-Little Debbie Cake-100ml,Britannia,259.67,100ml,Others
-Maggie Noodles-1kg,Nestle,281.69,1kg,Instant & Snacks
-KitKat-50ml,Nestle,138.47,50ml,Chocolates & Sweets
-Everyday Dairy Whitener-500g,Nestle,88.64,500g,Others
-Milkmaid-250ml,Nestle,209.12,250ml,Others
-Amul Butter-500ml,Amul,302.11,500ml,Dairy Products
-Amul Cheese Slices-500ml,Amul,77.07,500ml,Dairy Products
-Amul Taaza Milk-500ml,Amul,472.61,500ml,Dairy Products
-Amul Ice Cream-200g,Amul,413.83,200g,Dairy Products
-Dabur Honey-500g,Dabur,372.11,500g,Health & Wellness
-Dabur Chyawanprash-500ml,Dabur,122.48,500ml,Health & Wellness
-Real Fruit Juice-1kg,Dabur,295.69,1kg,Beverages
-Dabur Red Toothpaste-2L,Dabur,259.66,2L,Personal Care
-Aloo Bhujia-500ml,Haldiram's,117.86,500ml,Savories & Namkeen
-Soan Papdi-500g,Haldiram's,400.41,500g,Chocolates & Sweets
-Kaju Katli-1kg,Haldiram's,230.37,1kg,Chocolates & Sweets
-Moong Dal-100ml,Haldiram's,342.11,100ml,Savories & Namkeen
-Bingo! Mad Angles-1L,ITC,419.13,1L,Instant & Snacks
-Aashirvaad Atta-250ml,ITC,387.93,250ml,Home Essentials
-Sunfeast Dark Fantasy-200g,ITC,152.0,200g,Chocolates & Sweets
-Classmate Notebook-50ml,ITC,405.22,50ml,Home Essentials
-Patanjali Ghee-50ml,Patanjali,235.03,50ml,Others
-Patanjali Dant Kanti-500g,Patanjali,79.17,500g,Others
-Patanjali Aloe Vera Juice-50ml,Patanjali,33.41,50ml,Beverages
-Patanjali Honey-1kg,Patanjali,68.07,1kg,Health & Wellness
-Colgate MaxFresh-50ml,Colgate,189.36,50ml,Personal Care
-Colgate Vedshakti-1L,Colgate,431.81,1L,Personal Care
-Colgate Zig Zag Brush-200g,Colgate,418.01,200g,Personal Care
-Lux Soap-500ml,Hindustan Unilever,252.97,500ml,Personal Care
-Dove Shampoo-100g,Hindustan Unilever,326.37,100g,Personal Care
-Pears Face Wash-50ml,Hindustan Unilever,36.12,50ml,Personal Care
-Surf Excel Detergent-500g,Hindustan Unilever,92.15,500g,Home Essentials
+product_name,brand,mrp,pack_size,category,discount,barcode
+Parle-G Biscuits-1kg,Parle,325.26,1kg,Biscuits & Cookies,0.2,9162477132862
+Monaco Biscuits-500g,Parle,11.68,500g,Biscuits & Cookies,0.2,4432536631984
+Hide & Seek Fab-100g,Parle,469.38,100g,Biscuits & Cookies,0.1,4598579293793
+Krackjack-100g,Parle,422.95,100g,Biscuits & Cookies,0.1,0716698863132
+Good Day Butter Cookies-500g,Britannia,95.07,500g,Biscuits & Cookies,0.3,5369646638490
+Marie Gold-500g,Britannia,398.06,500g,Biscuits & Cookies,0.1,0396157747062
+NutriChoice Digestive-1kg,Britannia,180.7,1kg,Biscuits & Cookies,0.3,3039721055995
+Little Debbie Cake-200g,Britannia,310.57,200g,Others,0.2,7444240325777
+Maggie Noodles-100g,Nestle,473.89,100g,Instant & Snacks,0.1,8019099667280
+KitKat-2L,Nestle,446.78,2L,Chocolates & Sweets,0.1,5172019864373
+Everyday Dairy Whitener-1L,Nestle,83.36,1L,Others,0.1,0384310698918
+Milkmaid-500g,Nestle,261.52,500g,Others,0.1,8331748478397
+Amul Butter-2L,Amul,31.44,2L,Dairy Products,0.3,4677454409662
+Amul Cheese Slices-1L,Amul,284.82,1L,Dairy Products,0.2,6334467700354
+Amul Taaza Milk-50ml,Amul,303.0,50ml,Dairy Products,0.2,1111575903836
+Amul Ice Cream-100g,Amul,424.71,100g,Dairy Products,0.1,4139817297588
+Dabur Honey-500g,Dabur,105.72,500g,Health & Wellness,0.3,4366798323013
+Dabur Chyawanprash-200g,Dabur,310.09,200g,Health & Wellness,0.3,7637583449801
+Real Fruit Juice-1kg,Dabur,52.6,1kg,Beverages,0.2,1348192822356
+Dabur Red Toothpaste-500ml,Dabur,463.3,500ml,Personal Care,0.3,9144907172132
+Aloo Bhujia-100ml,Haldiram's,383.62,100ml,Savories & Namkeen,0.1,0738526723747
+Soan Papdi-50ml,Haldiram's,216.55,50ml,Chocolates & Sweets,0.2,9266280092114
+Kaju Katli-500g,Haldiram's,467.13,500g,Chocolates & Sweets,0.2,5134716599924
+Moong Dal-500ml,Haldiram's,303.8,500ml,Savories & Namkeen,0.3,6027474550050
+Bingo! Mad Angles-2L,ITC,422.48,2L,Instant & Snacks,0.2,6725595315145
+Aashirvaad Atta-100g,ITC,254.74,100g,Home Essentials,0.1,9198906173238
+Sunfeast Dark Fantasy-250ml,ITC,183.65,250ml,Chocolates & Sweets,0.1,4235115730580
+Classmate Notebook-2L,ITC,269.95,2L,Home Essentials,0.3,0808046252142
+Patanjali Ghee-1L,Patanjali,48.08,1L,Others,0.2,8127180383180
+Patanjali Dant Kanti-1kg,Patanjali,474.25,1kg,Others,0.2,8941193832270
+Patanjali Aloe Vera Juice-250ml,Patanjali,381.51,250ml,Beverages,0.1,7422530354084
+Patanjali Honey-500ml,Patanjali,496.08,500ml,Health & Wellness,0.3,4273214053116
+Colgate MaxFresh-250ml,Colgate,432.34,250ml,Personal Care,0.3,0605422143053
+Colgate Vedshakti-50ml,Colgate,91.14,50ml,Personal Care,0.2,5860083287047
+Colgate Zig Zag Brush-250ml,Colgate,219.7,250ml,Personal Care,0.2,8040704513366
+Lux Soap-1kg,Hindustan Unilever,120.66,1kg,Personal Care,0.1,6779975542290
+Dove Shampoo-1L,Hindustan Unilever,414.45,1L,Personal Care,0.3,3765924537017
+Pears Face Wash-1L,Hindustan Unilever,198.21,1L,Personal Care,0.1,1685542309027
+Surf Excel Detergent-100g,Hindustan Unilever,42.85,100g,Home Essentials,0.1,6811776431096
